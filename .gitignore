@@ -3,3 +3,4 @@ jest-output
 dist
 .vscode
 .env
+junit.xml

@@ -11,7 +11,7 @@ describe('/posts CRUD Operations', () => {
     userPost = createPost(response.body.id);
   });
 
-  it('should create a new post', async () => {  
+  it('should create a new post', async () => {
     await apiClient
       .post('/posts', userPost)
       .expect(201)
