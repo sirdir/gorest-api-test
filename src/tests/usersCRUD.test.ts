@@ -1,10 +1,9 @@
 import { apiClient } from '../utils';
 import { createUser } from '../utils';
 
-describe('GoRest User CRUD Operations', () => {
+describe('/users CRUD Operations', () => {
   const userData = createUser({ status: 'active' });
   let id: number;
-  console.log(userData);
 
   it('should create a new user', async () => {
     await apiClient

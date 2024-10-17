@@ -2,8 +2,6 @@ import supertest from 'supertest';
 import dotenv from 'dotenv';
 import path from 'path';
 
-console.log(path.resolve(__dirname, '..', '..', '.env'));
-
 dotenv.config({ path: path.resolve(__dirname, '..', '..', '.env') });
 
 const API_BASE_URL = 'https://gorest.co.in/public/v2';
