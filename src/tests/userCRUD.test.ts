@@ -1,13 +1,10 @@
-import { apiClient } from '../utils/apiClient';
+import { apiClient } from '../utils';
+import { createUser } from '../utils';
 
 describe('GoRest User CRUD Operations', () => {
-  const userData = {
-    name: 'John Doe',
-    email: `john.doe${Math.random() * 1_000_000}@mail.com`,
-    gender: 'male',
-    status: 'active',
-  };
+  const userData = createUser({ status: 'active' });
   let id: number;
+  console.log(userData);
 
   it('should create a new user', async () => {
     await apiClient
@@ -30,10 +27,7 @@ describe('GoRest User CRUD Operations', () => {
   });
 
   it('should update the user details', async () => {
-    const updatedData = {
-      name: 'John Doe Updated',
-      status: 'inactive',
-    };
+    const updatedData = createUser({ status: 'inactive' });
 
     await apiClient
       .put(`/users/${id}`, updatedData)
