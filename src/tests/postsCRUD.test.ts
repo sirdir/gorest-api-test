@@ -4,11 +4,19 @@ import { createUser } from '../utils';
 
 describe('/posts CRUD Operations', () => {
   let userPost: any;
+  let userId: number;
   let id: number;
 
   beforeAll(async () => {
     const response = await apiClient.post('/users', createUser()).expect(201);
-    userPost = createPost(response.body.id);
+    userId = response.body.id;
+    userPost = createPost(userId);
+  });
+
+  afterAll(async () => {
+    if (userId !== undefined) {
+      await apiClient.delete(`/users/${userId}`).expect(204);
+    }
   });
 
   it('should create a new post', async () => {

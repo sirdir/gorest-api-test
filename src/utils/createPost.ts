@@ -1,6 +1,6 @@
 import { faker } from '@faker-js/faker';
 
-export const createPost = (user_id: string, options: { title?: string; body?: string } = {}) => {
+export const createPost = (user_id: number, options: { title?: string; body?: string } = {}) => {
   return {
     user_id,
     title: options.title ?? faker.lorem.sentence(3),
