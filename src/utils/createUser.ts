@@ -1,6 +1,8 @@
 import { faker } from '@faker-js/faker';
 
-export const createUser = (options: { name?: string; email?: string; gender?: string; status?: string } = {}) => {
+export type UserStatus = 'active' | 'inactive';
+
+export const createUser = (options: { name?: string; email?: string; gender?: string; status?: UserStatus } = {}) => {
   return {
     name: options.name ?? faker.internet.userName(),
     email: options.email ?? faker.internet.email(),

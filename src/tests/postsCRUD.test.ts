@@ -1,11 +1,9 @@
-import { apiClient } from '../utils';
-import { createPost } from '../utils';
-import { createUser } from '../utils';
+import { apiClient, createPost, createUser } from '../utils';
 
 describe('/posts CRUD Operations', () => {
   let userPost: any;
   let userId: number;
-  let id: number;
+  let postId: number;
 
   beforeAll(async () => {
     const response = await apiClient.post('/users', createUser()).expect(201);
@@ -26,16 +24,16 @@ describe('/posts CRUD Operations', () => {
       .then((response) => {
         expect(response.body).toHaveProperty('id');
         expect(response.body).toMatchObject(userPost);
-        id = response.body.id;
+        postId = response.body.id;
       });
   });
 
   it('should retrieve post details', async () => {
     await apiClient
-      .get(`/posts/${id}`)
+      .get(`/posts/${postId}`)
       .expect(200)
       .then((response) => {
-        expect(response.body).toStrictEqual({ ...userPost, id });
+        expect(response.body).toStrictEqual({ ...userPost, id: postId });
       });
   });
 
@@ -43,12 +41,12 @@ describe('/posts CRUD Operations', () => {
     const updatedPost = createPost(userPost.user_id);
 
     await apiClient
-      .put(`/posts/${id}`, updatedPost)
+      .put(`/posts/${postId}`, updatedPost)
       .expect(200)
-      .then((response) => expect(response.body).toStrictEqual({ ...userPost, ...updatedPost, id }));
+      .then((response) => expect(response.body).toStrictEqual({ ...userPost, ...updatedPost, id: postId }));
   });
 
   it('should delete the post', async () => {
-    await apiClient.delete(`/posts/${id}`).expect(204);
+    await apiClient.delete(`/posts/${postId}`).expect(204);
   });
 });
